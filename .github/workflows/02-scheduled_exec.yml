@@ -11,11 +11,24 @@ on:
       - cron: '0 8 * * 1'
 
 jobs:
+  # build:
+  #   steps:
+      # -baixar as deps
+      # -subir a aplicacao
+      # -gerar a versao
+    # descrição do job
     e2e-tests:
+      # if: (build = sucesso; entoa pode prosseguir)
+      #maquina que o job vai executar
       runs-on: ubuntu-latest
       #passo a passo das acoes do job
       steps:
-
+        # - checkout
+        # - run: npm install
+        # - run: npm run test:e2e
+        # steps:
+          # - instalar as deps
+          # -executar o comando para rodar os testes
         - uses: actions/checkout@v4
 
         # - uses: actions/setup-node@v4
