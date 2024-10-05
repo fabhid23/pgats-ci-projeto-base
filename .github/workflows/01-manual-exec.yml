@@ -19,7 +19,7 @@ jobs:
     e2e-tests:
       # if: (build = sucesso; entoa pode prosseguir)
       #maquina que o job vai executar
-      runs-on: ['ubuntu-latest']
+      runs-on: ubuntu-latest
       #passo a passo das acoes do job
       steps:
         # - checkout
