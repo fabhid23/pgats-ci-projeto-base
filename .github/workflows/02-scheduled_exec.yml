@@ -7,15 +7,15 @@ name: 'Execução Agendada'
   #gatilhos de exec agendada = schedule
 
 on:
-  schedule:
-    - cron: '0 8 * * 1'
+    schedule:
+      - cron: '0 8 * * 1'
 
 jobs:
     e2e-tests:
       runs-on: ubuntu-latest
       #passo a passo das acoes do job
       steps:
-      
+
         - uses: actions/checkout@v4
 
         # - uses: actions/setup-node@v4
