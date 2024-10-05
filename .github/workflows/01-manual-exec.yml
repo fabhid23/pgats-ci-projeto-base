@@ -1,0 +1,48 @@
+# CI de nivel 01 - disparo manual a partir de 1 clique
+
+#nome que vai aparecer la nas opções de pipe
+name: 'Execução Manual'
+
+# triggers ou gatilhos de execução (regras de disparo da execucao 'triggers')
+  #gatilhos de exec manual = workflow_dipath
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # build:
+  #   steps:
+      # -baixar as deps
+      # -subir a aplicacao
+      # -gerar a versao
+    # descrição do job
+    e2e-tests:
+      # if: (build = sucesso; entoa pode prosseguir)
+      #maquina que o job vai executar
+      runs-on: ['ubuntu-latest']
+      #passo a passo das acoes do job
+      steps:
+        # - checkout
+        # - run: npm install
+        # - run: npm run test:e2e
+        # steps:
+          # - instalar as deps
+          # -executar o comando para rodar os testes
+        - uses: actions/checkout@v4
+
+        # - uses: actions/setup-node@v4
+        #   with:
+        #     node-version: '16'
+
+        - name: Instalado yarn
+          run: npm install -g yarn
+
+        - name: Instalando dependencias
+          run: yarn
+
+        - name: Instalando Playwright
+          run: yarn playwright install
+
+        - name: Testes E2E (end-to-end)
+          run: yarn run e2e
+
