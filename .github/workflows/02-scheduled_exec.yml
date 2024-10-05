@@ -15,12 +15,7 @@ jobs:
       runs-on: ubuntu-latest
       #passo a passo das acoes do job
       steps:
-        # - checkout
-        # - run: npm install
-        # - run: npm run test:e2e
-        # steps:
-          # - instalar as deps
-          # -executar o comando para rodar os testes
+      
         - uses: actions/checkout@v4
 
         # - uses: actions/setup-node@v4
