@@ -7,9 +7,9 @@ pool:
 jobs:
 - job: InstallNode
   steps:
-  - script: |
-      curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-      sudo apt-get install -y nodejs
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18'
     displayName: 'Install Node.js'
 
 - job: InstallDependencies
