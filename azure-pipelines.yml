@@ -29,4 +29,5 @@ steps:
     yarn run e2e
   displayName: 'Executar Testes Playwright'
 
-
+strategy:
+  maxParallel: 1 
