@@ -4,30 +4,34 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
+jobs:
+- job: InstallNode
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18'
+    displayName: 'Install Node.js'
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18'
-  displayName: 'Install Node.js'
+- job: InstallDependencies
+  dependsOn: InstallNode
+  steps:
+  - script: npm install
+    displayName: 'npm install'
 
-- script: npm install
-  displayName: 'npm install'
+  - script: npx playwright install --with-deps
+    displayName: 'Install Playwright browsers'
 
-- script: npx playwright install --with-deps
-  displayName: 'Install Playwright browsers'
+  - script: |
+      npm install -g yarn
+    displayName: 'Instalar yarn'
 
-- script: |
-    npm install -g yarn
-  displayName: 'Instalar yarn'
+  - script: |
+      yarn install
+    displayName: 'Instalar Dependências'
 
-- script: |
-    yarn install
-  displayName: 'Instalar Dependências'
-
-- script: |
-    yarn run e2e
-  displayName: 'Executar Testes Playwright'
-
-strategy:
-  maxParallel: 1 
+- job: RunTests
+  dependsOn: InstallDependencies
+  steps:
+  - script: |
+      yarn run e2e
+    displayName: 'Executar Testes Playwright'
