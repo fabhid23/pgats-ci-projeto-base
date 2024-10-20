@@ -26,10 +26,6 @@ steps:
   displayName: 'Instalar Dependências'
 
 - script: |
-    yarn playwright install
-  displayName: 'Instalar Browsers do Playwright'
-
-- script: |
     yarn run e2e
   displayName: 'Executar Testes Playwright'
 
