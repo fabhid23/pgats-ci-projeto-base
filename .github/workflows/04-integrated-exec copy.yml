@@ -1,13 +1,22 @@
-# CI de Nível 04 - disparo dentro do fluxo de CI de desenvolvimento
+#gist prof
+# CI de Nível 04 - Disparo dentro do fluxo de CI de desenvolvimento
 
 # nome que vai aparecer la nas opções de pipe
-name: 'Execução integrada'
+name: 'Execução Integrada gist'
 
 # regras de disparo da execucao (triggers/gatilhos)
 # gatilho de exec manual = workflow_dispatch
 
 on:
   workflow_dispatch:
+
+# inspecao
+#   padronizacao (formatacao de código)
+# testes 💜
+#   unidade
+#   e2e 💜
+#     build
+# deploy
 
 jobs:
   inspection:
@@ -25,24 +34,9 @@ jobs:
       - name: Padronizacao de codigo (Lint)
         run: yarn lint
 
-  unit:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Instalando Yarn
-        run: npm install -g yarn
-
-      - name: Instalando dependências
-        run: yarn
-
-      - name: Testes de unidade
-        run: yarn run test
-
-  # descrição do job
+  # descricao do job
   e2e-tests:
-    # maquina que job vai executar
+    # maquina que o job vai executar
     runs-on: ubuntu-latest
 
     # passo a passo das acoes do job
@@ -64,3 +58,10 @@ jobs:
 
       - name: Testes E2E (end-to-end)
         run: yarn run e2e
+
+      # passed, failed, cancelled
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio-de-testes
+          path: ./playwright-report
